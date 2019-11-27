@@ -5,11 +5,11 @@ import { APPEND_APP_TOOL } from '@things-factory/apptool-base'
 import '@material/mwc-textfield'
 
 console.log(`
-▄▄▄▄ ▄▄▄▄▄           ▄▄▄▄▄
-▓      ▓             ▓    ▓
-▓▓▓▓   ▓  ▄▄▄  ▄ ▄ ▄ ▓    ▓
-   ▓   ▓ ▓   ▓ ▓ ▓ ▓ ▓    ▓
-▀▀▀▀   ▀  ▀▀▀   ▀ ▀  ▀▀▀▀▀
+ ▄▄▄ ▄▄▄▄▄           ▄▄▄▄▄
+▓   ▀  ▓             ▓    ▓
+▀▀▄▄   ▓  ▄▄▄  ▄ ▄ ▄ ▓    ▓
+▄   ▓  ▓ ▓   ▓ ▓ ▓ ▓ ▓    ▓
+ ▀▀▀   ▀  ▀▀▀   ▀ ▀  ▀▀▀▀▀
 `)
 
 export default function bootstrap() {

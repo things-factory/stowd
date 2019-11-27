@@ -34,12 +34,63 @@ export class Galleria extends LitElement {
           z-index: 1;
         }
 
+        [like],
+        [backward],
+        [forward] {
+          position: absolute;
+          z-index: 10;
+          width: 20px;
+          height: 20px;
+          padding: 5px;
+          border-radius: 50%;
+          background-color: white;
+          font-size: 1.3em;
+          transition: opacity 0.3s ease-in;
+        }
+
+        [like] {
+          top: 5%;
+          left: 5%;
+          opacity: 0.8;
+        }
+
+        [forward],
+        [backward] {
+          opacity: 0;
+        }
+
+        :host(:hover) [backward] {
+          display: unset;
+          top: 50%;
+          left: 5%;
+          opacity: 0.8;
+          transform: translate(0, -50%);
+        }
+
+        :host(:hover) [forward] {
+          display: unset;
+          top: 50%;
+          right: 5%;
+          opacity: 0.8;
+          transform: translate(0, -50%);
+        }
+
+        [like]:hover,
+        :host(:hover) [forward]:hover,
+        :host(:hover) [backward]:hover {
+          opacity: 1;
+        }
+
         [control] {
           position: absolute;
           width: 100%;
           bottom: 0;
           z-index: 10;
           text-align: center;
+        }
+
+        [control] mwc-icon {
+          font-size: 0.1em;
         }
       `
     ]
@@ -67,17 +118,18 @@ export class Galleria extends LitElement {
         )}
       </ul>
 
-      <span backward @click=${e => (this.front = --this.front % collection.length)}><</span>
-      <span forward @click=${e => (this.front = ++this.front % collection.length)}>></span>
+      <mwc-icon like @click=${e => (this.front = ++this.front % collection.length)}>favorite_border</mwc-icon>
+      <mwc-icon backward @click=${e => (this.front = (--this.front + collection.length) % collection.length)}
+        >chevron_left</mwc-icon
+      >
+      <mwc-icon forward @click=${e => (this.front = ++this.front % collection.length)}>chevron_right</mwc-icon>
 
       <div control>
-        <span backward @click=${e => (this.front = --this.front % collection.length)}><</span>
         ${collection.map(
           (piece, idx) => html`
-            <span @click=${e => (this.front = idx)}>o</span>
+            <mwc-icon>${this.front == idx ? 'lens' : 'radio_button_unchecked'}</mwc-icon>
           `
         )}
-        <span forward @click=${e => (this.front = ++this.front % collection.length)}>></span>
       </div>
     `
   }
