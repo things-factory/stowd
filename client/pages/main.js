@@ -3,21 +3,39 @@ import { connect } from 'pwa-helpers/connect-mixin.js'
 import { store, PageView } from '@things-factory/shell'
 
 import './locations/location-map'
+import '../gallary/galleria'
 
 class StowdMain extends connect(store)(PageView) {
   static get styles() {
     return [
       css`
         :host {
+          display: flex;
+          position: relative;
           overflow-y: auto;
         }
 
-        location-map {
-          height: 600px;
+        [galleries] {
+          width: 45%;
+          padding: 30px;
         }
 
-        div {
-          height: 300px;
+        [map] {
+          position: relative;
+          width: 55%;
+        }
+
+        galleri-a {
+          margin: 20px;
+          width: 300px;
+          height: 200px;
+        }
+
+        location-map {
+          position: sticky;
+          top: 0;
+          width: 55%;
+          height: 100%;
         }
       `
     ]
@@ -30,23 +48,15 @@ class StowdMain extends connect(store)(PageView) {
 
   render() {
     return html`
+      <div galleries>
+        <galleri-a></galleri-a>
+        <galleri-a></galleri-a>
+        <galleri-a></galleri-a>
+        <galleri-a></galleri-a>
+        <galleri-a></galleri-a>
+        <galleri-a></galleri-a>
+      </div>
       <location-map> </location-map>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
-      <div>BOXES</div>
     `
   }
 

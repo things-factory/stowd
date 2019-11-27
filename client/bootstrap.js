@@ -14,7 +14,7 @@ export default function bootstrap() {
   store.dispatch({
     type: APPEND_APP_TOOL,
     tool: {
-      template: 'STOWD',
+      template: 'STowD',
       position: TOOL_POSITION.FRONT
     }
   })
