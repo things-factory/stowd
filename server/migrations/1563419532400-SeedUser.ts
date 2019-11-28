@@ -5,23 +5,10 @@ import { getRepository, MigrationInterface, QueryRunner, In, Transaction } from 
 
 const SEED_USERS = [
   {
-    name: 'ACT Admin',
-    email: 'admin@act.com',
+    name: 'DEMO Admin',
+    email: 'admin@demo.com',
     password: '1234',
-    domainName: 'ELCC',
-    bizplaces: [
-      {
-        name: 'Advance Chemical Trading',
-        mainBizplace: true
-      }
-    ],
-    roleName: 'Super Admin'
-  },
-  {
-    name: 'ELCC Admin',
-    email: 'admin@elcc.com',
-    password: '1234',
-    domainName: 'ELCC',
+    domainName: 'DEMO',
     bizplaces: [
       {
         name: 'ELCC Sdn Bhd',

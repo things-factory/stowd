@@ -47,7 +47,7 @@ body {
 
   /* icon style */
   --icon-tiny-size: 24px;
-  --icon-default-size: 36px;
+  --icon-default-size: 48px;
   --icon-big-size: 48px;
   --icon-default-color: #fff;
 
@@ -56,4 +56,5 @@ body {
   --mdc-theme-primary: var(--primary-color);
   --mdc-theme-on-secondary: white;
   --mdc-theme-secondary: var(--primary-color);
+  --mdc-icon-size: 32px;
 }
