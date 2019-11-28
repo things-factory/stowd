@@ -13,7 +13,6 @@ export class Galleria extends LitElement {
 
         [collection] {
           flex: 1;
-
           list-style: none;
         }
 
@@ -57,22 +56,26 @@ export class Galleria extends LitElement {
         [forward],
         [backward] {
           opacity: 0;
+          top: 50%;
+          transform: translate(0, -50%);
+        }
+
+        [backward] {
+          left: 5%;
+        }
+
+        [forward] {
+          right: 5%;
         }
 
         :host(:hover) [backward] {
           display: unset;
-          top: 50%;
-          left: 5%;
           opacity: 0.8;
-          transform: translate(0, -50%);
         }
 
         :host(:hover) [forward] {
           display: unset;
-          top: 50%;
-          right: 5%;
           opacity: 0.8;
-          transform: translate(0, -50%);
         }
 
         [like]:hover,
@@ -118,7 +121,7 @@ export class Galleria extends LitElement {
         )}
       </ul>
 
-      <mwc-icon like @click=${e => (this.front = ++this.front % collection.length)}>favorite_border</mwc-icon>
+      <mwc-icon like @click=${e => console.log('i like..')}>favorite_border</mwc-icon>
       <mwc-icon backward @click=${e => (this.front = (--this.front + collection.length) % collection.length)}
         >chevron_left</mwc-icon
       >
