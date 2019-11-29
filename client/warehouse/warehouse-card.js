@@ -21,7 +21,7 @@ export class WarehouseCard extends LitElement {
           display: flex;
           align-items: center;
           font-size: 0.8em;
-          top: 0;
+          top: 10px;
           right: 0;
         }
 
@@ -51,7 +51,10 @@ export class WarehouseCard extends LitElement {
   }
 
   static get properties() {
-    return {}
+    return {
+      name: String,
+      position: Object /* {lat, lng} */
+    }
   }
 
   render() {
@@ -59,7 +62,7 @@ export class WarehouseCard extends LitElement {
       <galleri-a></galleri-a>
       <div info>
         <div note>[super partner] cold storage</div>
-        <div brief>Blah Blah Blah Blah Blah Blah</div>
+        <h2 brief>${this.name}</h2>
         <div desc>Blah Blah Blah Blah Blah Blah</div>
         <div desc>Blah Blah Blah Blah Blah Blah</div>
       </div>

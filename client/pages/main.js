@@ -7,7 +7,8 @@ import { UPDATE_BIZPLACES } from '../actions/search'
 import '../locations/location-map'
 import '../warehouse/warehouse-card'
 
-import { ICONS } from '../locations/marker-icons'
+import { ICONS, FOCUS_ICON } from '../locations/marker-icons'
+const SCALED_SIZE = { width: 30, height: 30 }
 
 class StowdMain extends connect(store)(PageView) {
   static get styles() {
@@ -24,8 +25,13 @@ class StowdMain extends connect(store)(PageView) {
         }
 
         warehouse-card {
-          margin: 20px;
+          margin: 0 10px;
+          padding: 10px 0;
           border-bottom: lightgray solid 1px;
+        }
+
+        warehouse-card:hover {
+          cursor: pointer;
         }
 
         location-map {
@@ -37,29 +43,52 @@ class StowdMain extends connect(store)(PageView) {
       `
     ]
   }
+
   static get properties() {
     return {
       bizplaces: Array,
-      locations: Array
+      warehouses: Array,
+      focused: Object
     }
   }
 
   render() {
+    var warehouses = this.warehouses || []
     return html`
       <div galleries>
-        <warehouse-card></warehouse-card>
-        <warehouse-card></warehouse-card>
-        <warehouse-card></warehouse-card>
-        <warehouse-card></warehouse-card>
-        <warehouse-card></warehouse-card>
-        <warehouse-card></warehouse-card>
+        ${warehouses.map(
+          warehouse =>
+            html`
+              <warehouse-card
+                .name=${warehouse.name}
+                .position=${warehouse.position}
+                @mouseenter=${e => this.onWarehouseCardMouseEnter(e)}
+                @mouseleave=${e => this.onWarehouseCardMouseLeave(e)}
+              ></warehouse-card>
+            `
+        )}
       </div>
-      <location-map .locations=${this.locations}> </location-map>
+      <location-map .locations=${warehouses} .focused=${this.focused}> </location-map>
     `
   }
 
+  onWarehouseCardMouseEnter(e) {
+    var { name, position } = e.target
+    this.focused = {
+      name,
+      position,
+      icon: {
+        url: FOCUS_ICON,
+        scaledSize: SCALED_SIZE
+      }
+    }
+  }
+
+  onWarehouseCardMouseLeave(e) {
+    this.focused = null
+  }
+
   async pageInitialized() {
-    console.log('pageInitialized....')
     var response = await client.query({
       query: gql`
         query {
@@ -84,24 +113,20 @@ class StowdMain extends connect(store)(PageView) {
     }
   }
 
-  updated(changes) {
-    if (changes.has('bizplaces')) {
-      this.locations = this.bizplaces.map(bizplace => {
+  pageUpdated(changes) {
+    if ('bizplaces' in changes) {
+      this.warehouses = (this.bizplaces || []).map(bizplace => {
         var [lat, lng] = bizplace.latlng.split(',').map(pos => Number(pos))
+
         return {
+          name: bizplace.name,
           position: { lat, lng },
           icon: {
             url: ICONS[Math.round(Math.random() * 100) % 6],
-            scaledSize: new google.maps.Size(30, 30)
+            scaledSize: SCALED_SIZE
           },
           title: bizplace.name,
-          label: {
-            text: bizplace.name,
-            color: 'navy',
-            fontSize: '1.2em'
-            // fontFamily: '',
-            // fontWeight: 'bold'
-          }
+          content: bizplace.name
         }
       })
     }

@@ -1,7 +1,6 @@
 import { LitElement, html, css } from 'lit-element'
 
 import ScriptLoader from './script-loader'
-import { WAREHOUSE_ICON_01, WAREHOUSE_IMAGE_02 } from './script-loader'
 
 export class LocationMap extends LitElement {
   static async load() {
@@ -35,7 +34,8 @@ export class LocationMap extends LitElement {
       lng: Number,
       zoom: Number,
       map: Object,
-      locations: Array
+      locations: Array,
+      focused: Object
     }
   }
 
@@ -43,8 +43,12 @@ export class LocationMap extends LitElement {
     return this.shadowRoot.querySelector('[map]')
   }
 
-  async firstUpdated() {
+  async readyMap() {
     await LocationMap.load()
+
+    if (this.map) {
+      return
+    }
 
     var show = (lat, lng, zoom) => {
       const position = { lat, lng }
@@ -55,13 +59,15 @@ export class LocationMap extends LitElement {
           center: position
         })
 
+        this.markers.forEach(marker => marker.setMap(map))
+
         this.map = map
       } catch (e) {
         console.error(e)
       }
     }
 
-    var { lat, lng, zoom = 12 } = this
+    var { lat, lng, zoom = 10 } = this
 
     if ((isNaN(lat) || isNaN(lng)) && 'geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -73,26 +79,87 @@ export class LocationMap extends LitElement {
     }
   }
 
+  async firstUpdated() {
+    await this.readyMap()
+  }
+
   async buildMarkers(locations) {
-    await LocationMap.load()
+    await this.readyMap()
 
     if (this.markers) {
       this.markers.forEach(marker => marker.setMap(null))
       this.markers = []
     }
 
-    this.markers = locations.map(
-      location =>
-        new google.maps.Marker({
-          ...location,
-          map: this.map
-        })
-    )
+    this.markers = locations.map(location => {
+      let marker = new google.maps.Marker({
+        ...location,
+        map: this.map
+      })
+
+      google.maps.event.addListener(marker, 'click', e => {
+        if (location.content) {
+          var infowindow = this.infoWindow
+          infowindow.open(this.map, marker)
+          infowindow.setContent(location.content)
+        }
+      })
+
+      return marker
+    })
+  }
+
+  get infoWindow() {
+    if (!this._infoWindow) {
+      this._infoWindow = new google.maps.InfoWindow({
+        content: 'loading...'
+      })
+    }
+
+    return this._infoWindow
+  }
+
+  setFocus(focus, icon) {
+    focus.setZIndex(1)
+    focus.setIcon(icon)
+  }
+
+  resetFocus(focus, icon) {
+    focus.setZIndex(0)
+    focus.setIcon(icon)
+  }
+
+  async changeFocus(after, before) {
+    await this.readyMap()
+
+    if (before) {
+      var idx = this.locations.findIndex(
+        location =>
+          location.name == before.name &&
+          location.position.lat == before.position.lat &&
+          location.position.lng == before.position.lng
+      )
+      idx !== -1 && this.markers && this.resetFocus(this.markers[idx], this.locations[idx].icon)
+    }
+
+    if (after) {
+      var idx = this.locations.findIndex(
+        location =>
+          location.name == after.name &&
+          location.position.lat == after.position.lat &&
+          location.position.lng == after.position.lng
+      )
+      idx !== -1 && this.markers && this.setFocus(this.markers[idx], after.icon)
+    }
   }
 
   updated(changes) {
-    if (changes.has('locations') && LocationMap.loaded) {
+    if (changes.has('locations')) {
       this.buildMarkers(this.locations)
+    }
+
+    if (changes.has('focused')) {
+      this.changeFocus(this.focused, changes.get('focused'))
     }
   }
 
