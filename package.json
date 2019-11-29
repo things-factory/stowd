@@ -33,7 +33,9 @@
     "@things-factory/auth-ui-jwt": "^1.0.0-alpha.1",
     "@things-factory/biz-base": "^1.0.0-alpha.1",
     "@things-factory/layout-ui": "^1.0.0-alpha.1",
-    "@things-factory/shell": "^1.0.0-alpha.1"
+    "@things-factory/more-ui": "^1.0.0-alpha.1",
+    "@things-factory/shell": "^1.0.0-alpha.1",
+    "@things-factory/system-ui": "^1.0.0-alpha.1"
   },
   "devDependencies": {}
 }

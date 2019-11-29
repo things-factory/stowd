@@ -63,7 +63,8 @@ class StowdMain extends connect(store)(PageView) {
     `
   }
 
-  async firstUpdated() {
+  async pageInitialized() {
+    console.log('pageInitialized....')
     var response = await client.query({
       query: gql`
         query {
@@ -80,10 +81,12 @@ class StowdMain extends connect(store)(PageView) {
       `
     })
 
-    store.dispatch({
-      type: UPDATE_BIZPLACES,
-      bizplaces: response.data.bizplaces.items
-    })
+    if (!response.errors) {
+      store.dispatch({
+        type: UPDATE_BIZPLACES,
+        bizplaces: response.data.bizplaces.items
+      })
+    }
   }
 
   updated(changes) {
