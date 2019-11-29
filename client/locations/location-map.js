@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element'
 
 import ScriptLoader from './script-loader'
+import { WAREHOUSE_ICON_01, WAREHOUSE_IMAGE_02 } from './script-loader'
 
 export class LocationMap extends LitElement {
   static async load() {

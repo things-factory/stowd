@@ -4,8 +4,10 @@ import gql from 'graphql-tag'
 import { client, store, PageView } from '@things-factory/shell'
 import { UPDATE_BIZPLACES } from '../actions/search'
 
-import './locations/location-map'
-import '../gallary/galleria'
+import '../locations/location-map'
+import '../warehouse/warehouse-card'
+
+import { ICONS } from '../locations/marker-icons'
 
 class StowdMain extends connect(store)(PageView) {
   static get styles() {
@@ -18,25 +20,18 @@ class StowdMain extends connect(store)(PageView) {
         }
 
         [galleries] {
-          width: 45%;
-          padding: 30px;
+          width: 680px;
         }
 
-        [map] {
-          position: relative;
-          width: 55%;
-        }
-
-        galleri-a {
+        warehouse-card {
           margin: 20px;
-          width: 300px;
-          height: 200px;
+          border-bottom: lightgray solid 1px;
         }
 
         location-map {
           position: sticky;
           top: 0;
-          width: 55%;
+          flex: 1;
           height: 100%;
         }
       `
@@ -52,12 +47,12 @@ class StowdMain extends connect(store)(PageView) {
   render() {
     return html`
       <div galleries>
-        <galleri-a></galleri-a>
-        <galleri-a></galleri-a>
-        <galleri-a></galleri-a>
-        <galleri-a></galleri-a>
-        <galleri-a></galleri-a>
-        <galleri-a></galleri-a>
+        <warehouse-card></warehouse-card>
+        <warehouse-card></warehouse-card>
+        <warehouse-card></warehouse-card>
+        <warehouse-card></warehouse-card>
+        <warehouse-card></warehouse-card>
+        <warehouse-card></warehouse-card>
       </div>
       <location-map .locations=${this.locations}> </location-map>
     `
@@ -95,6 +90,11 @@ class StowdMain extends connect(store)(PageView) {
         var [lat, lng] = bizplace.latlng.split(',').map(pos => Number(pos))
         return {
           position: { lat, lng },
+          icon: {
+            url: ICONS[Math.round(Math.random() * 100) % 6],
+            scaledSize: new google.maps.Size(30, 30)
+          },
+          title: bizplace.name,
           label: {
             text: bizplace.name,
             color: 'navy',
