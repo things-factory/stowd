@@ -1,7 +1,7 @@
 import { html, css } from 'lit-element'
 import { connect } from 'pwa-helpers/connect-mixin.js'
 import gql from 'graphql-tag'
-import { client, store, PageView } from '@things-factory/shell'
+import { client, store, navigate, PageView } from '@things-factory/shell'
 import { UPDATE_BIZPLACES } from '../actions/search'
 
 import '../locations/location-map'
@@ -10,7 +10,7 @@ import '../warehouse/warehouse-card'
 import { ICONS, FOCUS_ICON } from '../locations/marker-icons'
 const SCALED_SIZE = { width: 30, height: 30 }
 
-class StowdMain extends connect(store)(PageView) {
+class WarehousesPage extends connect(store)(PageView) {
   static get styles() {
     return [
       css`
@@ -64,6 +64,7 @@ class StowdMain extends connect(store)(PageView) {
                 .position=${warehouse.position}
                 @mouseenter=${e => this.onWarehouseCardMouseEnter(e)}
                 @mouseleave=${e => this.onWarehouseCardMouseLeave(e)}
+                @click=${e => navigate(`warehouse-page/${warehouse.name}`)}
               ></warehouse-card>
             `
         )}
@@ -143,4 +144,4 @@ class StowdMain extends connect(store)(PageView) {
   }
 }
 
-window.customElements.define('stowd-main', StowdMain)
+customElements.define('warehouses-page', WarehousesPage)

@@ -5,8 +5,12 @@ export default {
   route,
   routes: [
     {
-      tagname: 'stowd-main',
-      page: 'stowd-main'
+      tagname: 'warehouses-page',
+      page: 'warehouses-page'
+    },
+    {
+      tagname: 'warehouse-page',
+      page: 'warehouse-page'
     }
   ],
   bootstrap

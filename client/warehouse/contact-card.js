@@ -1,7 +1,8 @@
 import { LitElement, html, css } from 'lit-element'
 import '../gallary/image-slider'
+import '../locations/location-map'
 
-export class WarehouseCard extends LitElement {
+export class ContactCard extends LitElement {
   static get styles() {
     return [
       css`
@@ -59,19 +60,29 @@ export class WarehouseCard extends LitElement {
 
   render() {
     return html`
-      <image-slider></image-slider>
-      <div info>
-        <div note>[super partner] cold storage</div>
-        <h2 brief>${this.name}</h2>
-        <div desc>Blah Blah Blah Blah Blah Blah</div>
-        <div desc>Blah Blah Blah Blah Blah Blah</div>
+      <location-map .locations=${this.location} .focused=${this.focused}> </location-map>
+      <div location>
+        <mwc-icon>room</mwc-icon>
+        <pre>${this.address}</pre>
+        <a href="https://www.google.com/maps/search/?api=1&query=${this.address}" target="_blank">위치 안내</a>
       </div>
-      <div rate>
-        <mwc-icon>star</mwc-icon>
-        <span>4.70(203)</span>
+      <div phone>
+        <mwc-icon>phone</mwc-icon>
+        <pre>${this.phone}</pre>
+        <a href="tel:+${this.phone}">전화 걸기</a>
+      </div>
+      <div www>
+        <mwc-icon>language</mwc-icon>
+        <pre>${this.phone}</pre>
+        <a href="tel:+${this.phone}">전화 걸기</a>
+      </div>
+      <div biztime>
+        <mwc-icon>timelapse</mwc-icon>
+        <pre>영업 중 · 영업 종료 시간: 6:00 PM</pre>
+        <div biztime>시간 보기</div>
       </div>
     `
   }
 }
 
-customElements.define('warehouse-card', WarehouseCard)
+customElements.define('warehouse-card', ContactCard)
