@@ -126,7 +126,13 @@ class StowdMain extends connect(store)(PageView) {
             scaledSize: SCALED_SIZE
           },
           title: bizplace.name,
-          content: bizplace.name
+          get content() {
+            var cards = document.createElement('WAREHOUSE-CARD')
+            cards.name = this.name
+            cards.position = this.position
+
+            return cards
+          }
         }
       })
     }
