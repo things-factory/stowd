@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element'
 import { images } from './images'
 
-export class ImageSlider extends LitElement {
+export class ImageSliderPopup extends LitElement {
   static get styles() {
     return [
       css`
@@ -154,4 +154,4 @@ export class ImageSlider extends LitElement {
   }
 }
 
-customElements.define('image-slider', ImageSlider)
+customElements.define('image-slider-popup', ImageSliderPopup)

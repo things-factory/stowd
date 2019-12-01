@@ -1,46 +1,15 @@
 import { LitElement, html, css } from 'lit-element'
 import '../gallary/image-slider'
 import '../locations/location-map'
+import { ICONS, FOCUS_ICON } from '../locations/marker-icons'
+const SCALED_SIZE = { width: 30, height: 30 }
 
 export class ContactCard extends LitElement {
   static get styles() {
     return [
       css`
-        :host {
-          display: flex;
-          position: relative;
-        }
-
-        image-slider {
-          margin: 5px;
-          width: 300px;
-          height: 200px;
-        }
-
-        [rate] {
-          position: absolute;
-          display: flex;
-          align-items: center;
-          font-size: 0.8em;
-          top: 10px;
-          right: 0;
-        }
-
-        [info] {
-          flex: 1;
-        }
-
-        [note] {
-          font-size: 1em;
-          font-weight: bold;
-        }
-
-        [brief] {
-          font-size: 1.3em;
-        }
-
-        [desc] {
-          font-size: 1em;
+        location-map {
+          height: 320px;
         }
 
         mwc-icon {
@@ -54,35 +23,54 @@ export class ContactCard extends LitElement {
   static get properties() {
     return {
       name: String,
-      position: Object /* {lat, lng} */
+      position: Object /* {lat, lng} */,
+      address: String,
+      phone: String,
+      homepage: String,
+      postalCode: String
     }
   }
 
   render() {
     return html`
-      <location-map .locations=${this.location} .focused=${this.focused}> </location-map>
+      <location-map .locations=${[this.location]} .lat=${this.position.lat} .lng=${this.position.lng}> </location-map>
       <div location>
         <mwc-icon>room</mwc-icon>
-        <pre>${this.address}</pre>
-        <a href="https://www.google.com/maps/search/?api=1&query=${this.address}" target="_blank">위치 안내</a>
+        <span>${this.address}</span>
+        <a href="https://www.google.com/maps/search/?api=1&query=${this.name}" target="_blank">위치 안내</a>
       </div>
       <div phone>
         <mwc-icon>phone</mwc-icon>
-        <pre>${this.phone}</pre>
+        <span>${this.phone}</span>
         <a href="tel:+${this.phone}">전화 걸기</a>
       </div>
       <div www>
         <mwc-icon>language</mwc-icon>
-        <pre>${this.phone}</pre>
-        <a href="tel:+${this.phone}">전화 걸기</a>
+        <span>${this.homepage}</span>
       </div>
       <div biztime>
         <mwc-icon>timelapse</mwc-icon>
-        <pre>영업 중 · 영업 종료 시간: 6:00 PM</pre>
-        <div biztime>시간 보기</div>
+        <span>영업 중 · 영업 종료 시간: 6:00 PM</span>
+        <span biztime>시간 보기</span>
       </div>
+      <pre>
+      Monday ‑ Sunday 10:00 AM ‑ 6:00 PM
+      Monday ‑ Friday 9:00 AM ‑ 6:00 PM
+      </pre
+      >
     `
+  }
+
+  updated(changes) {
+    this.location = {
+      name: this.name,
+      position: this.position,
+      icon: {
+        url: ICONS[Math.round(Math.random() * 100) % 6],
+        scaledSize: SCALED_SIZE
+      }
+    }
   }
 }
 
-customElements.define('warehouse-card', ContactCard)
+customElements.define('contact-card', ContactCard)

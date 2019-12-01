@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { client, store, PageView } from '@things-factory/shell'
 
 import '../gallary/galleria'
+import '../warehouse/contact-card'
 
 export class WarehousePage extends connect(store)(PageView) {
   static get styles() {
@@ -16,6 +17,19 @@ export class WarehousePage extends connect(store)(PageView) {
         galleri-a {
           height: 360px;
         }
+
+        [main] {
+          display: flex;
+          margin: 20px;
+        }
+
+        [left] {
+          flex: 2;
+        }
+
+        [right] {
+          flex: 1;
+        }
       `
     ]
   }
@@ -27,13 +41,30 @@ export class WarehousePage extends connect(store)(PageView) {
   }
 
   render() {
-    var warehouse = this.warehouse || {}
+    var warehouse = this.warehouse || {
+      latlng: '0,0'
+    }
+    var contact = (warehouse.contactPoints || [])[0] || {}
+    var [lat, lng] = warehouse.latlng.split(',').map(pos => Number(pos))
+    var position = { lat, lng }
 
     return html`
       <galleri-a></galleri-a>
-      <div slogan>general contracter</div>
-      <div name>${warehouse.name}</div>
-      <div description>${warehouse.description}</div>
+      <div main>
+        <div left>
+          <div slogan>general contracter</div>
+          <div name>${warehouse.name}</div>
+          <div description>${warehouse.description}</div>
+        </div>
+        <contact-card
+          .name=${warehouse.name}
+          .position=${position}
+          .address=${warehouse.address}
+          .postalCode=${warehouse.postalCode}
+          right
+        >
+        </contact-card>
+      </div>
     `
   }
 

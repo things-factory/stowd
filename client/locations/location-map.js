@@ -22,6 +22,7 @@ export class LocationMap extends LitElement {
 
         [map] {
           flex: 1;
+          border-radius: 10px;
         }
       `
     ]
@@ -59,7 +60,7 @@ export class LocationMap extends LitElement {
           center: position
         })
 
-        this.markers.forEach(marker => marker.setMap(map))
+        this.markers && this.markers.forEach(marker => marker.setMap(map))
 
         this.map = map
       } catch (e) {
@@ -160,6 +161,13 @@ export class LocationMap extends LitElement {
 
     if (changes.has('focused')) {
       this.changeFocus(this.focused, changes.get('focused'))
+    }
+
+    if (changes.has('lat') || changes.has('lng')) {
+      this.map.setCenter({
+        lat: this.lat,
+        lng: this.lng
+      })
     }
   }
 

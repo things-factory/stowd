@@ -6,22 +6,12 @@ export class Galleria extends LitElement {
     return [
       css`
         :host {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-        }
-
-        [collection] {
-          flex: 1;
-          list-style: none;
-        }
-
-        [piece] {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
+          display: grid;
+          grid-template-columns: repeat() (4, 1fr);
+          grid-template-rows: repeat() (2, 1fr);
+          grid-template-areas:
+            'large large small1 small2'
+            'large large small3 small4';
         }
 
         img {
@@ -29,33 +19,38 @@ export class Galleria extends LitElement {
           height: 100%;
         }
 
-        [front] {
-          z-index: 1;
+        img:nth-child(1) {
+          grid-area: large;
+        }
+        img:nth-child(2) {
+          grid-area: small1;
+        }
+        img:nth-child(3) {
+          grid-area: small2;
+        }
+        img:nth-child(4) {
+          grid-area: small3;
+        }
+        img:nth-child(5) {
+          grid-area: small4;
         }
       `
     ]
   }
 
   static get properties() {
-    return {
-      front: Number
-    }
+    return {}
   }
 
   render() {
-    if (this.front === undefined) {
-      this.front = 0
-    }
+    var collection = images.slice(0, 5)
 
-    var collection = images
     return html`
-      <ul collection>
-        ${collection.map(
-          (piece, idx) => html`
-            <li piece ?front=${idx == this.front}><img src=${piece} /></li>
-          `
-        )}
-      </ul>
+      ${collection.map(
+        (piece, idx) => html`
+          <img src=${piece} />
+        `
+      )}
     `
   }
 }
