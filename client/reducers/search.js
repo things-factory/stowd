@@ -1,7 +1,8 @@
-import { UPDATE_BIZPLACES } from '../actions/search.js'
+import { UPDATE_BIZPLACES, UPDATE_SEARCH_MAP } from '../actions/search.js'
 
 const INITIAL_STATE = {
-  bizplaces: []
+  bizplaces: [],
+  map: null
 }
 
 const search = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,12 @@ const search = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         bizplaces: action.bizplaces
+      }
+
+    case UPDATE_SEARCH_MAP:
+      return {
+        ...state,
+        map: action.map
       }
 
     default:

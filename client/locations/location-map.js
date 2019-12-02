@@ -52,6 +52,12 @@ export class LocationMap extends LitElement {
         this.markers && this.markers.forEach(marker => marker.setMap(map))
 
         this.map = map
+
+        this.dispatchEvent(
+          new CustomEvent('map-change', {
+            detail: this.map
+          })
+        )
       } catch (e) {
         console.error(e)
       }

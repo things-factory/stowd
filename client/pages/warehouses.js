@@ -2,7 +2,7 @@ import { html, css } from 'lit-element'
 import { connect } from 'pwa-helpers/connect-mixin.js'
 import gql from 'graphql-tag'
 import { client, store, navigate, PageView } from '@things-factory/shell'
-import { UPDATE_BIZPLACES } from '../actions/search'
+import { UPDATE_BIZPLACES, UPDATE_SEARCH_MAP } from '../actions/search'
 
 import '../locations/location-map'
 import '../warehouse/warehouse-card'
@@ -69,7 +69,16 @@ class WarehousesPage extends connect(store)(PageView) {
             `
         )}
       </div>
-      <location-map .locations=${warehouses} .focused=${this.focused}> </location-map>
+      <location-map
+        .locations=${warehouses}
+        .focused=${this.focused}
+        @map-change=${e =>
+          store.dispatch({
+            type: UPDATE_SEARCH_MAP,
+            map: e.detail
+          })}
+      >
+      </location-map>
     `
   }
 
