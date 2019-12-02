@@ -2,6 +2,7 @@ import { html } from 'lit-element'
 import { store } from '@things-factory/shell'
 import { TOOL_POSITION } from '@things-factory/layout-base'
 import { APPEND_APP_TOOL } from '@things-factory/apptool-base'
+
 import search from './reducers/search'
 
 import './search/search-input'

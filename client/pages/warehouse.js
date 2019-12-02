@@ -40,6 +40,17 @@ export class WarehousePage extends connect(store)(PageView) {
     }
   }
 
+  get context() {
+    return {
+      actions: [
+        {
+          title: 'check availability',
+          action: () => console.log('check availability..')
+        }
+      ]
+    }
+  }
+
   render() {
     var warehouse = this.warehouse || {
       latlng: '0,0'
