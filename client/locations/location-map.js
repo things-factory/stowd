@@ -1,18 +1,8 @@
 import { LitElement, html, css } from 'lit-element'
 
-import ScriptLoader from './script-loader'
+import GoogleMapLoader from '../google-map-loader'
 
 export class LocationMap extends LitElement {
-  static async load() {
-    if (LocationMap.loaded) {
-      return
-    }
-    var key = 'AIzaSyBgQZb-SFqjQBC_XTxNiz0XapejNwV9PgA'
-
-    await ScriptLoader.load('https://maps.googleapis.com/maps/api/js' + (key ? '?key=' + key : ''))
-    LocationMap.loaded = true
-  }
-
   static get styles() {
     return [
       css`
@@ -30,7 +20,6 @@ export class LocationMap extends LitElement {
 
   static get properties() {
     return {
-      loaded: Boolean,
       lat: Number,
       lng: Number,
       zoom: Number,
@@ -45,7 +34,7 @@ export class LocationMap extends LitElement {
   }
 
   async readyMap() {
-    await LocationMap.load()
+    await GoogleMapLoader.load()
 
     if (this.map) {
       return
