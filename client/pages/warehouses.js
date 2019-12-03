@@ -64,7 +64,7 @@ class WarehousesPage extends connect(store)(PageView) {
                 .position=${warehouse.position}
                 @mouseenter=${e => this.onWarehouseCardMouseEnter(e)}
                 @mouseleave=${e => this.onWarehouseCardMouseLeave(e)}
-                @click=${e => navigate(`warehouse-page/${warehouse.name}`)}
+                @click=${e => navigate(`warehouse/${warehouse.name}`)}
               ></warehouse-card>
             `
         )}

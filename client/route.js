@@ -1,13 +1,13 @@
 export default function route(page) {
   switch (page) {
     case '':
-      return '/warehouses-page'
+      return '/warehouses'
 
-    case 'warehouses-page':
+    case 'warehouses':
       import('./pages/warehouses')
       return page
 
-    case 'warehouse-page':
+    case 'warehouse':
       import('./pages/warehouse')
       return page
   }

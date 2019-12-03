@@ -44,6 +44,17 @@ export class WarehousePage extends connect(store)(PageView) {
     return {
       actions: [
         {
+          type: 'link',
+          title: 'goto warehouses..',
+          href: 'warehouses'
+        },
+        {
+          type: 'text',
+          title: 'From RM594/pallet'
+        },
+        {
+          type: 'button' /* default type */,
+          icon: 'eco',
           title: 'check availability',
           action: () => console.log('check availability..')
         }

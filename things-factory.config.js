@@ -6,11 +6,11 @@ export default {
   routes: [
     {
       tagname: 'warehouses-page',
-      page: 'warehouses-page'
+      page: 'warehouses'
     },
     {
       tagname: 'warehouse-page',
-      page: 'warehouse-page'
+      page: 'warehouse'
     }
   ],
   bootstrap
