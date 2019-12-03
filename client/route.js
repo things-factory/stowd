@@ -10,5 +10,9 @@ export default function route(page) {
     case 'warehouse':
       import('./pages/warehouse')
       return page
+
+    case 'register':
+      import('./pages/supplier/register')
+      return page
   }
 }

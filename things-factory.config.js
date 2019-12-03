@@ -11,6 +11,10 @@ export default {
     {
       tagname: 'warehouse-page',
       page: 'warehouse'
+    },
+    {
+      tagname: 'register-page',
+      page: 'register'
     }
   ],
   bootstrap
