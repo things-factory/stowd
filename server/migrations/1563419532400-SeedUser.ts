@@ -1,4 +1,4 @@
-import { User, Role } from '@things-factory/auth-base'
+import { User, Role, UserStatus } from '@things-factory/auth-base'
 import { Bizplace, BizplaceUser } from '@things-factory/biz-base'
 import { Domain } from '@things-factory/shell'
 import { getRepository, MigrationInterface, QueryRunner, In, Transaction } from 'typeorm'
@@ -9,6 +9,7 @@ const SEED_USERS = [
     email: 'admin@demo.com',
     password: '1234',
     domainName: 'DEMO',
+    status: UserStatus.ACTIVATED,
     bizplaces: [
       {
         name: 'ELCC Sdn Bhd',

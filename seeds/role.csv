@@ -1,0 +1,8 @@
+name,description,domainName
+Super Admin,full priviledge,DEMO
+Business Owner,admin,DEMO
+Warehouse Supervisor,control all zones,DEMO
+Office Admin,control admin stuff,DEMO
+Warehouse Manager,leader in each zones,DEMO
+Warehouse Staff,staff in warehouse,DEMO
+Customer,Role for customers,DEMO

@@ -5,6 +5,7 @@ import { client, store, PageView } from '@things-factory/shell'
 
 import '../gallary/galleria'
 import '../warehouse/contact-card'
+import '../board/board-player'
 
 export class WarehousePage extends connect(store)(PageView) {
   static get styles() {
@@ -20,15 +21,21 @@ export class WarehousePage extends connect(store)(PageView) {
 
         [main] {
           display: flex;
-          margin: 20px;
         }
 
         [left] {
           flex: 2;
+          margin: 20px;
         }
 
         [right] {
           flex: 1;
+          margin: 20px;
+        }
+
+        stowd-board-player {
+          background-color: yellow;
+          height: 300px;
         }
       `
     ]
@@ -36,7 +43,8 @@ export class WarehousePage extends connect(store)(PageView) {
 
   static get properties() {
     return {
-      warehouse: Object
+      warehouse: Object,
+      boards: Array
     }
   }
 
@@ -77,6 +85,7 @@ export class WarehousePage extends connect(store)(PageView) {
           <div slogan>general contracter</div>
           <div name>${warehouse.name}</div>
           <div description>${warehouse.description}</div>
+          <stowd-board-player .playGroupId=${'2b351372-4f13-4f23-aa8e-eedbc7c94d01'}></stowd-board-player>
         </div>
         <contact-card
           .name=${warehouse.name}
@@ -93,6 +102,8 @@ export class WarehousePage extends connect(store)(PageView) {
   pageInitialized(changes) {
     console.log(changes)
   }
+
+  fetchBoards() {}
 
   async pageUpdated(changes, lifecycle) {
     var name = this.lifecycle.resourceId
