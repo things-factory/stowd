@@ -51,7 +51,7 @@ export class SearchInput extends connect(store)(LitElement) {
       types: ['establishment']
     }
 
-    this.autocomplete = new google.maps.places.Autocomplete(input, options)
+    // this.autocomplete = new google.maps.places.Autocomplete(input, options)
     // var defaultBounds = new google.maps.LatLngBounds(
     //   new google.maps.LatLng(-33.8902, 151.1759),
     //   new google.maps.LatLng(-33.8474, 151.2631)
