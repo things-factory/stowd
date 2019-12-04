@@ -123,8 +123,8 @@ class WarehousesPage extends connect(store)(PageView) {
     }
   }
 
-  pageUpdated(changes) {
-    if ('bizplaces' in changes) {
+  updated(changes) {
+    if (changes.has('bizplaces')) {
       this.warehouses = (this.bizplaces || []).map(bizplace => {
         var [lat, lng] = bizplace.latlng.split(',').map(pos => Number(pos))
 
@@ -147,6 +147,8 @@ class WarehousesPage extends connect(store)(PageView) {
       })
     }
   }
+
+  pageUpdated(changes) {}
 
   stateChanged(state) {
     this.bizplaces = state.search.bizplaces

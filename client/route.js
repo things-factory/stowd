@@ -1,7 +1,11 @@
 export default function route(page) {
   switch (page) {
     case '':
-      return '/warehouses'
+      return '/home'
+
+    case 'home':
+      import('./pages/site/home')
+      return page
 
     case 'warehouses':
       import('./pages/warehouses')

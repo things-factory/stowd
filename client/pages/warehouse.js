@@ -100,9 +100,7 @@ export class WarehousePage extends connect(store)(PageView) {
     `
   }
 
-  pageInitialized(changes) {
-    console.log(changes)
-  }
+  pageInitialized(changes) {}
 
   fetchBoards() {}
 

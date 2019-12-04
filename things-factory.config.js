@@ -5,6 +5,10 @@ export default {
   route,
   routes: [
     {
+      tagname: 'site-home',
+      page: 'home'
+    },
+    {
       tagname: 'warehouses-page',
       page: 'warehouses'
     },
