@@ -17,6 +17,7 @@ export class WarehousePage extends connect(store)(PageView) {
 
         galleri-a {
           height: 360px;
+          margin: 10px;
         }
 
         [main] {

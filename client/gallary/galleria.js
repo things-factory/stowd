@@ -7,6 +7,7 @@ export class Galleria extends LitElement {
       css`
         :host {
           display: grid;
+          grid-gap: 10px;
           grid-template-columns: repeat() (4, 1fr);
           grid-template-rows: repeat() (2, 1fr);
           grid-template-areas:
