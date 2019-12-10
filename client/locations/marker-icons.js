@@ -39,9 +39,9 @@ const FOCUS_ICON_TEMPLATE = `<?xml version="1.0" encoding="utf-8"?>
 </svg>
 `
 
-// export const ICONS = ['black', 'red', 'blue', 'yellow', 'orange', 'tomato'].map(
-//   color => 'data:image/svg+xml;charset=UTF-8;base64,' + btoa(ICON_TEMPLATE.replace('{{fillcolor}}', color))
-// )
+export const ICONS = ['black', 'red', 'blue', 'yellow', 'orange', 'tomato'].map(
+  color => 'data:image/svg+xml;charset=UTF-8;base64,' + btoa(ICON_TEMPLATE.replace('{{fillcolor}}', color))
+)
 
-// export const FOCUS_ICON =
-//   'data:image/svg+xml;charset=UTF-8;base64,' + btoa(FOCUS_ICON_TEMPLATE.replace('{{fillcolor}}', 'brown'))
+export const FOCUS_ICON =
+  'data:image/svg+xml;charset=UTF-8;base64,' + btoa(FOCUS_ICON_TEMPLATE.replace('{{fillcolor}}', 'brown'))
