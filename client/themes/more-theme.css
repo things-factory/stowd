@@ -1,0 +1,13 @@
+body {
+  --more-panel-background-color: rgba(57, 78, 100, 0.9);
+  --more-panel-min-width: 200px;
+
+  --morelet-min-width: 200px;
+  --morelet-title-color: #fff;
+  --morelet-title-font: normal 14px var(--theme-font);
+  --morelet-border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  --morelet-focus-border-top: 3px solid var(--primary-color);
+  --morelet-background-color: #fff;
+  --morelet-color: var(--secondary-color);
+  --morelet-font: normal 0.9em/1.4em var(--theme-font);
+}
