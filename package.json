@@ -1,6 +1,6 @@
 {
   "name": "@things-factory/stowd",
-  "version": "1.0.0-alpha.1",
+  "version": "2.0.0",
   "main": "dist-server/index.js",
   "browser": "client/index.js",
   "things-factory": true,
@@ -28,17 +28,17 @@
     "migration:revert": "node ./node_modules/typeorm/cli.js migration:revert"
   },
   "dependencies": {
-    "@things-factory/apptool-ui": "^1.0.0-alpha.1",
-    "@things-factory/auth-provider-jwt": "^1.0.0-alpha.1",
-    "@things-factory/auth-ui-jwt": "^1.0.0-alpha.1",
-    "@things-factory/biz-base": "^1.0.0-alpha.1",
-    "@things-factory/board-ui": "^1.0.0-alpha.1",
-    "@things-factory/context-ui": "^1.0.0-alpha.1",
-    "@things-factory/email-base": "^1.0.0-alpha.1",
-    "@things-factory/layout-ui": "^1.0.0-alpha.1",
-    "@things-factory/more-ui": "^1.0.0-alpha.1",
-    "@things-factory/shell": "^1.0.0-alpha.1",
-    "@things-factory/system-ui": "^1.0.0-alpha.1",
+    "@things-factory/apptool-ui": "^2.0.0",
+    "@things-factory/auth-provider-jwt": "^2.0.0",
+    "@things-factory/auth-ui-jwt": "^2.0.0",
+    "@things-factory/biz-base": "^2.0.0",
+    "@things-factory/board-ui": "^2.0.0",
+    "@things-factory/context-ui": "^2.0.0",
+    "@things-factory/email-base": "^2.0.0",
+    "@things-factory/layout-ui": "^2.0.0",
+    "@things-factory/more-ui": "^2.0.0",
+    "@things-factory/shell": "^2.0.0",
+    "@things-factory/system-ui": "^2.0.0",
     "@things-scene/chartjs": "*",
     "@things-scene/clock": "*",
     "@things-scene/clone": "*",
@@ -68,6 +68,6 @@
     "@things-scene/wheel-sorter": "*"
   },
   "devDependencies": {
-    "@things-factory/board-test": "^1.0.0-alpha.1"
+    "@things-factory/board-test": "^2.0.0"
   }
 }
