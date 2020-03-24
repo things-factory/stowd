@@ -15,7 +15,6 @@ export class BoardPlayer extends connect(store)(LitElement) {
       _boards: Array,
       _provider: Object,
       _baseUrl: String,
-      _license: Object,
       _showSpinner: Boolean
     }
   }
@@ -130,15 +129,10 @@ export class BoardPlayer extends connect(store)(LitElement) {
       player && player.stop()
       this.refresh()
     }
-
-    if (changes.has('_license')) {
-      if (scene && scene.license) scene.license(this._license.key)
-    }
   }
 
   stateChanged(state) {
     this._baseUrl = state.app.baseUrl
-    this._license = state.license
   }
 
   get oopsNote() {
